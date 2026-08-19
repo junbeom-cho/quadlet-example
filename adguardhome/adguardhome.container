@@ -1,0 +1,20 @@
+[Unit]
+Description=AdGuard Home DNS Server
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+ContainerName=adguardhome
+Image=docker.io/adguard/adguardhome:latest
+Network=host
+Volume=/srv/adguard/work:/opt/adguardhome/work:Z
+Volume=/srv/adguard/conf:/opt/adguardhome/conf:Z
+NoNewPrivileges=true
+
+[Service]
+Restart=always
+RestartSec=10
+TimeoutStartSec=120
+
+[Install]
+WantedBy=multi-user.target
